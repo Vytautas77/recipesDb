@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const userRouter = require("./routers/users");
 const recipesRouter = require("./routers/recipes");
+const adminRouter = require("./routers/admin");
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,7 @@ mongoose
 
 app.use(userRouter);
 app.use(recipesRouter);
+app.use(adminRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`APP started on port ${process.env.PORT}`);
