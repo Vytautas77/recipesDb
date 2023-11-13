@@ -3,7 +3,7 @@ const router = express.Router();
 const validation = require("../middleware/validation");
 const { recipeRegistrationSchema } = require("../validation/RecipeSchema");
 const adminAuth = require("../middleware/adminAuth");
-const auth = require("../middleware/auth");
+// const auth = require("../middleware/auth");
 const {
   ADD_RECIPE,
   GET_RECIPES,
@@ -13,14 +13,9 @@ const {
   JOI_ADMIN_COMMENT,
 } = require("../controllers/recipes");
 
-router.post(
-  "/recipes",
-  validation(recipeRegistrationSchema),
-  adminAuth,
-  ADD_RECIPE
-);
-router.post("/recipes/userComment/:id", auth, JOI_USER_COMMENT);
-router.post("/recipes/adminComment/:id", adminAuth, JOI_ADMIN_COMMENT);
+router.post("/recipes", validation(recipeRegistrationSchema), ADD_RECIPE);
+router.post("/recipes/userComment/:id", JOI_USER_COMMENT);
+router.post("/recipes/adminComment/:id", JOI_ADMIN_COMMENT);
 router.get("/recipes", GET_RECIPES);
 router.get("/recipes/:id", GET_RECIPE_BY_ID);
 router.put(
